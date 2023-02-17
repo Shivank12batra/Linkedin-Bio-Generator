@@ -12,6 +12,17 @@ const App = () => {
   const [funFact, setFunFact] = useState('')
   const [bio, setBio] = useState('')
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('http://localhost:3001/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({name, jobTitle, industry, experience, skills, education, style, tone, funFact}),
+    }).then((res) => res.json()).then((data) => setBio(data.message))
+  }
+
   const handleStyleChange = (event) => {
     setStyle(event.target.value);
   };
@@ -25,7 +36,7 @@ const App = () => {
       <h1>Linkedin Bio Generator</h1>
       <p>Impress recruiters and colleagues with a professional and engaging LinkedIn profile bio, crafted by our AI tool!</p>
       <p>*You can leave the column bank if you don't find it relevant*</p>
-      <form>
+      <form onSubmit={handleSubmit}>
       <label htmlFor="name">Name:</label>
       <input value={name} onChange={(e) => setName(e.target.value)} type="text" id="name"/>
       <label htmlFor="job-title">Job Title:</label>
@@ -37,9 +48,9 @@ const App = () => {
       <label htmlFor="education">Education:</label>
       <input value={education} onChange={(e) => setEducation(e.target.value)} type="number" id="experience"/>
       <label htmlFor='skills'>Skills:</label>
-      <textarea 
+      <textArea 
       value={skills}
-      onChange={(e) => setSkills(e.target.value)}></textarea>
+      onChange={(e) => setSkills(e.target.value)}></textArea>
       <h2>Style</h2>
       <input
         type="radio"
@@ -75,12 +86,12 @@ const App = () => {
       />
       <label htmlFor="option2">Verbose</label>
       <label htmlFor='funFact'>Fun/Obscure Fact</label>
-      <textarea 
+      <textArea 
       value={funFact}
-      onChange={(e) => setFunFact(e.target.value)}></textarea>
-      <button>Submit</button>
+      onChange={(e) => setFunFact(e.target.value)}></textArea>
+      <button type='submit'>Submit</button>
       <label htmlFor='bio'>LinkedIn Bio Generated</label>
-      <textArea value={bio}></textArea>
+      <textArea>{bio}</textArea>
       </form>
     </div>
   )
