@@ -6,8 +6,8 @@ const App = () => {
   const [industry, setIndustry] = useState('')
   const [experience, setExperience] = useState(0)
   const [skills, setSkills] = useState('')
-  const [education, setEducation] = useState('concise')
-  const [style, setStyle] = useState('')
+  const [education, setEducation] = useState('')
+  const [style, setStyle] = useState('concise')
   const [tone, setTone] = useState('simple')
   const [funFact, setFunFact] = useState('')
   const [bio, setBio] = useState('')
@@ -51,47 +51,51 @@ const App = () => {
       <textArea 
       value={skills}
       onChange={(e) => setSkills(e.target.value)}></textArea>
-      <h2>Style</h2>
-      <input
-        type="radio"
-        id="option1"
-        value="concise"
-        checked={style === "concise"}
-        onChange={handleStyleChange}
-      />
-      <label htmlFor="option1">Concise</label>
-      <input
-        type="radio"
-        id="option2"
-        value="descriptive"
-        checked={style === "descriptive"}
-        onChange={handleStyleChange}
-      />
-      <label htmlFor="option2">Descriptive</label>
+      <div>
+        <h2>Style</h2>
+        <input
+          type="radio"
+          id="option1"
+          value="concise"
+          checked={style === "concise"}
+          onChange={handleStyleChange}
+        />
+        <label htmlFor="option1">Concise</label>
+        <input
+          type="radio"
+          id="option2"
+          value="descriptive"
+          checked={style === "descriptive"}
+          onChange={handleStyleChange}
+        />
+        <label htmlFor="option2">Descriptive</label>
+    </div>
+      <div>
       <h2>Tone</h2>
       <input
         type="radio"
-        id="option1"
+        id="option3"
         value="simple"
         checked={tone === "simple"}
         onChange={handleToneChange}
       />
-      <label htmlFor="option1">Simple</label>
+      <label htmlFor="option3">Simple</label>
       <input
         type="radio"
-        id="option2"
+        id="option4"
         value="verbose"
         checked={tone === "verbose"}
         onChange={handleToneChange}
       />
-      <label htmlFor="option2">Verbose</label>
+      <label htmlFor="option4">Verbose</label>
+      </div>
       <label htmlFor='funFact'>Fun/Obscure Fact</label>
       <textArea 
       value={funFact}
       onChange={(e) => setFunFact(e.target.value)}></textArea>
       <button type='submit'>Submit</button>
       <label htmlFor='bio'>LinkedIn Bio Generated</label>
-      <textArea>{bio}</textArea>
+      <div>{bio}</div>
       </form>
     </div>
   )
