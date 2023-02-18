@@ -46,7 +46,7 @@ const App = () => {
       <label htmlFor="experience">Experience:</label>
       <input value={experience} onChange={(e) => setExperience(e.target.value)} type="number" id="experience"/>
       <label htmlFor="education">Education:</label>
-      <input value={education} onChange={(e) => setEducation(e.target.value)} type="number" id="experience"/>
+      <input value={education} onChange={(e) => setEducation(e.target.value)} type="text" id="experience"/>
       <label htmlFor='skills'>Skills:</label>
       <textArea 
       value={skills}
