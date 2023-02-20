@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import './App.css';
+
 
 const App = () => {
   const [name, setName] = useState('')
@@ -32,27 +34,37 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Linkedin Bio Generator</h1>
-      <p>Impress recruiters and colleagues with a professional and engaging LinkedIn profile bio, crafted by our AI tool!</p>
-      <p>*You can leave the column bank if you don't find it relevant*</p>
-      <form onSubmit={handleSubmit}>
+    <div className='container'>
+      <h1 className='heading'>LinkedIn Bio Generator</h1>
+      <p className='description'>Impress recruiters and colleagues with a professional and engaging LinkedIn profile bio, crafted by our AI tool!</p>
+      <p className='disclaimer'>*You can leave the column bank if you don't find it relevant*</p>
+      <form className='form-class' onSubmit={handleSubmit}>
+      <div className='input-container'>
       <label htmlFor="name">Name:</label>
       <input value={name} onChange={(e) => setName(e.target.value)} type="text" id="name"/>
+      </div>
+      <div className='input-container'>
       <label htmlFor="job-title">Job Title:</label>
       <input value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} type="text" id="job-title"/>
+      </div>
+      <div className='input-container'>
       <label htmlFor="industry">Industry:</label>
       <input value={industry} onChange={(e) => setIndustry(e.target.value)} type="text" id="industry"/>
+      </div>
+      <div className='input-container'>
       <label htmlFor="experience">Experience:</label>
       <input value={experience} onChange={(e) => setExperience(e.target.value)} type="number" id="experience"/>
+      </div>
+      <div className='input-container'>
       <label htmlFor="education">Education:</label>
       <input value={education} onChange={(e) => setEducation(e.target.value)} type="text" id="experience"/>
+      </div>
+      <div className='input-container'>
       <label htmlFor='skills'>Skills:</label>
-      <textArea 
-      value={skills}
-      onChange={(e) => setSkills(e.target.value)}></textArea>
-      <div>
-        <h2>Style</h2>
+      <input value={skills} onChange={(e) => setSkills(e.target.value)} type='text' id='funFact'/>
+      </div>
+      <div className='input-container'>
+        <label htmlFor='style'>Style:</label>
         <input
           type="radio"
           id="option1"
@@ -70,8 +82,8 @@ const App = () => {
         />
         <label htmlFor="option2">Descriptive</label>
     </div>
-      <div>
-      <h2>Tone</h2>
+      <div className='input-container'>
+      <label htmlFor='tone'>Tone:</label>
       <input
         type="radio"
         id="option3"
@@ -87,15 +99,14 @@ const App = () => {
         checked={tone === "verbose"}
         onChange={handleToneChange}
       />
-      <label htmlFor="option4">Verbose</label>
+      <label htmlFor="option4" className='radio-label'>Verbose</label>
       </div>
-      <label htmlFor='funFact'>Fun/Obscure Fact</label>
-      <textArea 
-      value={funFact}
-      onChange={(e) => setFunFact(e.target.value)}></textArea>
-      <button type='submit'>Submit</button>
-      <label htmlFor='bio'>LinkedIn Bio Generated</label>
-      <div>{bio}</div>
+      <div className='input-container'>
+      <label htmlFor='funFact'>Fun Fact/Hobbies:</label>
+      <input value={funFact} onChange={(e) => setFunFact(e.target.value)} type='text' id='funFact'/>
+      </div>
+      <button type='submit' className='submit-btn'>Generate Bio</button>
+      <div className='bio'>{bio}</div>
       </form>
     </div>
   )
