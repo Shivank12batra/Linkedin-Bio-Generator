@@ -9,6 +9,7 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -34,8 +35,8 @@ form {
 .input-container {
   display: flex;
   flex-direction: row;
-  width: 50%;
-  margin-bottom: 0.2rem;
+  width: 30%;
+  margin-bottom: 2rem;
 }
 
 label {
@@ -52,14 +53,18 @@ input {
   /* text-align: left; */
   width: 60%;
   padding: 10px;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  /* margin-bottom: 20px; */
+  /* margin-top: 10px; */
   border-color: black;
   border-radius: 0.5rem;
 }
 
 input[type="radio"] {
-  width: 5%;
+  width: 4%;
+}
+
+.radio-label {
+  margin-top:10px;
 }
 
 button[type="submit"] {
@@ -72,3 +77,23 @@ button[type="submit"] {
   cursor: pointer;
   margin-bottom: 2rem;
 }
+
+textarea {
+  width: 50%;
+  margin-bottom: 10rem;
+}
+
+.footer-class {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  margin-top: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  z-index: 100;
+}
+
+/* fixed bottom-0 left-0 right-0 flex justify-center border-t bg-gray-50/50 py-2 text-black backdrop-blur-md dark:border-none dark:bg-black/20 dark:text-white/90" */

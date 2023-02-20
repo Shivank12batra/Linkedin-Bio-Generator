@@ -40,31 +40,31 @@ const App = () => {
       <p className='disclaimer'>*You can leave the column bank if you don't find it relevant*</p>
       <form className='form-class' onSubmit={handleSubmit}>
       <div className='input-container'>
-      <label htmlFor="name">Name:</label>
-      <input value={name} onChange={(e) => setName(e.target.value)} type="text" id="name"/>
+      <label htmlFor="name">Name</label>
+      <input value={name} onChange={(e) => setName(e.target.value)} placeholder='John Doe' type="text" id="name"/>
       </div>
       <div className='input-container'>
-      <label htmlFor="job-title">Job Title:</label>
-      <input value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} type="text" id="job-title"/>
+      <label htmlFor="job-title">Job Title</label>
+      <input value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder='Financial Analyst' type="text" id="job-title"/>
       </div>
       <div className='input-container'>
-      <label htmlFor="industry">Industry:</label>
-      <input value={industry} onChange={(e) => setIndustry(e.target.value)} type="text" id="industry"/>
+      <label htmlFor="industry">Industry</label>
+      <input value={industry} onChange={(e) => setIndustry(e.target.value)} placeholder='Finance' type="text" id="industry"/>
       </div>
       <div className='input-container'>
-      <label htmlFor="experience">Experience:</label>
-      <input value={experience} onChange={(e) => setExperience(e.target.value)} type="number" id="experience"/>
+      <label htmlFor="experience">Experience</label>
+      <input value={experience} onChange={(e) => setExperience(e.target.value)} type="number" min='0' id="experience"/>
       </div>
       <div className='input-container'>
-      <label htmlFor="education">Education:</label>
-      <input value={education} onChange={(e) => setEducation(e.target.value)} type="text" id="experience"/>
+      <label htmlFor="education">Education</label>
+      <input value={education} onChange={(e) => setEducation(e.target.value)} placeholder='MBA In Finance' type="text" id="experience"/>
       </div>
       <div className='input-container'>
-      <label htmlFor='skills'>Skills:</label>
-      <input value={skills} onChange={(e) => setSkills(e.target.value)} type='text' id='funFact'/>
+      <label htmlFor='skills'>Skills</label>
+      <input value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='Financial Modelling, MS Excel' type='text' id='funFact'/>
       </div>
       <div className='input-container'>
-        <label htmlFor='style'>Style:</label>
+        <label htmlFor='style'>Style</label>
         <input
           type="radio"
           id="option1"
@@ -72,7 +72,7 @@ const App = () => {
           checked={style === "concise"}
           onChange={handleStyleChange}
         />
-        <label htmlFor="option1">Concise</label>
+        <label htmlFor="option1" className='radio-label'>Concise</label>
         <input
           type="radio"
           id="option2"
@@ -80,10 +80,10 @@ const App = () => {
           checked={style === "descriptive"}
           onChange={handleStyleChange}
         />
-        <label htmlFor="option2">Descriptive</label>
+        <label htmlFor="option2" className='radio-label'>Descriptive</label>
     </div>
       <div className='input-container'>
-      <label htmlFor='tone'>Tone:</label>
+      <label htmlFor='tone'>Tone</label>
       <input
         type="radio"
         id="option3"
@@ -91,7 +91,7 @@ const App = () => {
         checked={tone === "simple"}
         onChange={handleToneChange}
       />
-      <label htmlFor="option3">Simple</label>
+      <label htmlFor="option3" className='radio-label'>Simple</label>
       <input
         type="radio"
         id="option4"
@@ -102,12 +102,15 @@ const App = () => {
       <label htmlFor="option4" className='radio-label'>Verbose</label>
       </div>
       <div className='input-container'>
-      <label htmlFor='funFact'>Fun Fact/Hobbies:</label>
-      <input value={funFact} onChange={(e) => setFunFact(e.target.value)} type='text' id='funFact'/>
+      <label htmlFor='funFact'>Fun Fact</label>
+      <input value={funFact} onChange={(e) => setFunFact(e.target.value)} placeholder='likes anime, heavy metal songs' type='text' id='funFact'/>
       </div>
       <button type='submit' className='submit-btn'>Generate Bio</button>
-      <div className='bio'>{bio}</div>
+      <textarea  value={bio} cols={50} rows={10} placeholder='your LinkedIn Bio Will Be Generated Here'>{bio}</textarea>
       </form>
+      <footer className='footer-class'>
+        Made with <span style={{'margin':'0.3rem'}}><i class="fa fa-heart"></i></span> by Shivank
+      </footer>
     </div>
   )
 }
