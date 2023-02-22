@@ -1,27 +1,43 @@
 :root {
-  --label-color: #1a73e8
+  --background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);
+  --primary-color: #3399ff;
+  --secondary-color: #0077cc;
+  --header-color: #333;
+  --text-color: #fff;
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
-  background-color: white;
-  color: #444444;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  background: var(--background-color);
+  /* color: #444444; */
   margin: 0;
   padding: 0;
   line-height: 1.5;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
+
 
 h1 {
   font-size: 36px;
+  color: var(--header-color);
   font-weight: bold;
   text-align: center;
-  margin: 50px 0 20px;
+  margin: 50px 0 2px;
+}
+
+.icon-btn {
+  /* margin-right: 1rem; */
+  color: var(--secondary-color);
+  text-align: center;
+  /* margin-top: 2rem; */
+  font-size: 1.5rem;
 }
 
 p {
   font-size: 18px;
   margin-bottom: 10px;
+  color: var(--header-color);
   text-align: center;
 }
 
@@ -44,7 +60,7 @@ label {
   width: 30%;
   font-size: 20px;
   font-weight: 600;
-  color: var(--label-color);
+  color: var(--primary-color);
   margin-bottom: 10px;
 }
 
@@ -55,6 +71,7 @@ input {
   padding: 10px;
   /* margin-bottom: 20px; */
   /* margin-top: 10px; */
+  color: var(--header-color);
   border-color: black;
   border-radius: 0.5rem;
 }
@@ -68,8 +85,8 @@ input[type="radio"] {
 }
 
 button[type="submit"] {
-  background-color: #1a73e8;
-  color: #ffffff;
+  background-color: var(--primary-color);
+  color: var(--text-color);
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -78,9 +95,16 @@ button[type="submit"] {
   margin-bottom: 2rem;
 }
 
+button:hover {
+  background-color: var(--secondary-color)
+}
+
 textarea {
   width: 50%;
   margin-bottom: 10rem;
+  border-color: black;
+  color: var(--header-color);
+  padding: 0.5rem;
 }
 
 .footer-class {
@@ -92,8 +116,8 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: var(--secondary-color);
+  color: #fff;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
-
-/* fixed bottom-0 left-0 right-0 flex justify-center border-t bg-gray-50/50 py-2 text-black backdrop-blur-md dark:border-none dark:bg-black/20 dark:text-white/90" */

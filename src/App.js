@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './App.css';
 
 
@@ -12,7 +12,25 @@ const App = () => {
   const [style, setStyle] = useState('concise')
   const [tone, setTone] = useState('simple')
   const [funFact, setFunFact] = useState('')
+  const [response, setResponse] = useState('')
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [bio, setBio] = useState('')
+
+  useEffect(() => {
+    // update the text in state, one letter at a time
+    console.log('hello guys!')
+    console.log(currentIndex)
+    const intervalId = setInterval(() => {
+      if (currentIndex >= response.length) {
+        clearInterval(intervalId);
+      } else {
+        setBio(response.substring(0, currentIndex + 1));
+        setCurrentIndex(currentIndex + 1);
+      }
+    }, 100);
+    return () => clearInterval(intervalId);
+  }, [currentIndex, response])
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +40,7 @@ const App = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({name, jobTitle, industry, experience, skills, education, style, tone, funFact}),
-    }).then((res) => res.json()).then((data) => setBio(data.message))
+    }).then((res) => res.json()).then((data) => setResponse(data.message))
   }
 
   const handleStyleChange = (event) => {
@@ -35,7 +53,8 @@ const App = () => {
 
   return (
     <div className='container'>
-      <h1 className='heading'>LinkedIn Bio Generator</h1>
+      <h1 className='heading'> LinkedIn Bio Generator</h1>
+      <div className='icon-btn'><i class="fa fa-linkedin"></i></div>
       <p className='description'>Impress recruiters and colleagues with a professional and engaging LinkedIn profile bio, crafted by our AI tool!</p>
       <p className='disclaimer'>*You can leave the column bank if you don't find it relevant*</p>
       <form className='form-class' onSubmit={handleSubmit}>
@@ -106,7 +125,7 @@ const App = () => {
       <input value={funFact} onChange={(e) => setFunFact(e.target.value)} placeholder='likes anime, heavy metal songs' type='text' id='funFact'/>
       </div>
       <button type='submit' className='submit-btn'>Generate Bio</button>
-      <textarea  value={bio} cols={50} rows={10} placeholder='your LinkedIn Bio Will Be Generated Here'>{bio}</textarea>
+      <textarea  value={bio} cols={50} rows={10} placeholder='your LinkedIn Bio Will Be Generated Here'></textarea>
       </form>
       <footer className='footer-class'>
         Made with <span style={{'margin':'0.3rem'}}><i class="fa fa-heart"></i></span> by Shivank

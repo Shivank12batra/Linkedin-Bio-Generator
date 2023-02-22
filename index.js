@@ -53,7 +53,8 @@ app.post('/', async(req, res) => {
     Bio:`
 
     const tokens = style === 'concise' ? 100 : 300
-    const response = await openai.createCompletion({
+    try {
+        const response = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: `${prompt}`,
         max_tokens: tokens,
@@ -61,7 +62,10 @@ app.post('/', async(req, res) => {
     })
     const message = response.data.choices[0].text
     console.log(message)
-    res.json({message: message})
+    res.json({message: message})   
+    } catch (error) {
+        res.json({message: 'Sorry! Because of too many hits on the server, we are unable to process your request right now.'})
+    }
 })
 
 app.listen(port, () => {
