@@ -84,6 +84,7 @@ const App = () => {
       </div>
       <div className='input-container'>
         <label htmlFor='style'>Style</label>
+        <div>
         <input
           type="radio"
           id="option1"
@@ -100,9 +101,11 @@ const App = () => {
           onChange={handleStyleChange}
         />
         <label htmlFor="option2" className='radio-label'>Descriptive</label>
+        </div>
     </div>
       <div className='input-container'>
       <label htmlFor='tone'>Tone</label>
+      <div>
       <input
         type="radio"
         id="option3"
@@ -119,6 +122,7 @@ const App = () => {
         onChange={handleToneChange}
       />
       <label htmlFor="option4" className='radio-label'>Verbose</label>
+      </div>
       </div>
       <div className='input-container'>
       <label htmlFor='funFact'>Fun Fact</label>

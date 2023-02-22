@@ -71,6 +71,7 @@ input {
 
 input[type="radio"] {
   width: 4%;
+  margin-left: 2rem;
 }
 
 .radio-label {
@@ -123,11 +124,12 @@ textarea {
     justify-content: center;
     align-items: center;
     width: 100%;
-  };
+  }
   label {
-    
-  };
+    width: 30%;
+    text-align: center;
+  }
   input {
-    width: 100%;
+    width: 50%;
   }
 }
