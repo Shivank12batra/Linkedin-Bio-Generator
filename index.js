@@ -6,7 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 const configuration = new Configuration({
     organization: "org-MSzKGqG43nicxKtFfb5WPvTB",
@@ -64,7 +64,7 @@ app.post('/', async(req, res) => {
     console.log(message)
     res.json({message: message})   
     } catch (error) {
-        res.json({message: 'Sorry! Because of too many hits on the server, we are unable to process your request right now.'})
+        res.json({message: 'Sorry! Because of too many hits on the server, we are unable to process your request right'})
     }
 })
 

@@ -126,7 +126,7 @@ const App = () => {
       </div>
       <div className='input-container'>
       <label htmlFor='funFact'>Fun Fact</label>
-      <input value={funFact} onChange={(e) => setFunFact(e.target.value)} placeholder='likes anime, heavy metal songs' type='text' id='funFact'/>
+      <input value={funFact} onChange={(e) => setFunFact(e.target.value)} placeholder='quick learner, likes anime, plays guitar' type='text' id='funFact'/>
       </div>
       <button type='submit' className='submit-btn'>Generate Bio</button>
       <textarea  value={bio} cols={50} rows={10} placeholder='your LinkedIn Bio Will Be Generated Here'></textarea>
