@@ -15,16 +15,10 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 app.use(bodyParser.json());
-var corsOptions = {
-   origin: '*',
-   optionsSuccessStatus: 200 
-}
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
-app.options('*', cors(corsOptions));
+app.use(cors());
+
+// OPTIONS request handler for /api/data
+app.options('/', cors());
 /** CORS setting with OPTIONS pre-flight handling */
 // app.use(function(req, res, next){
 //     res.header('Access-Control-Allow-Origin', '*');
@@ -37,9 +31,9 @@ app.options('*', cors(corsOptions));
   
   
 
-  app.get('/', (req, res) => {
-    console.log('this is working')
-  })
+//   app.get('/', (req, res) => {
+//     console.log('this is working')
+//   })
 
 
 app.post('/', async(req, res) => {
