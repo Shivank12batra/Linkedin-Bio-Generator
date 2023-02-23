@@ -20,6 +20,12 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // Change "*" to the allowed origin(s)
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  
 
 
 app.post('/', async(req, res) => {
