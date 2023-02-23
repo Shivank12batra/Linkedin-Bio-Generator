@@ -27,6 +27,10 @@ app.use(function(req, res, next) {
   });
   
 
+  app.get('/', (req, res) => {
+    console.log('this is working')
+  })
+
 
 app.post('/', async(req, res) => {
     const {name, jobTitle, industry, experience, skills, education, style, tone, funFact} = req.body
