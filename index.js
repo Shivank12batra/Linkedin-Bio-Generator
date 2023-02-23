@@ -20,21 +20,15 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://linkedin-bio-generator.onrender.com/");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  
-    // Handle preflight request
-    if (req.method === "OPTIONS") {
-      res.header("Access-Control-Allow-Origin", "https://linkedin-bio-generator.onrender.com/");
-      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-      res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-      res.status(200).end();
-    } else {
-      next();
-    }
-  });
+/** CORS setting with OPTIONS pre-flight handling */
+app.use(function(req, res, next){
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, accept, access-control-allow-origin');
+
+    if ('OPTIONS' === req.method) res.send(200);
+    else next();
+});
   
   
 
