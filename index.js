@@ -15,20 +15,25 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 app.use(bodyParser.json());
+var corsOptions = {
+   origin: '*',
+   optionsSuccessStatus: 200 
+}
 app.use(cors({
-    origin: ['http://localhost:3000', '*'],
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+app.options('*', cors(corsOptions));
 /** CORS setting with OPTIONS pre-flight handling */
-app.use(function(req, res, next){
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, accept, access-control-allow-origin');
+// app.use(function(req, res, next){
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, accept, access-control-allow-origin');
 
-    if ('OPTIONS' === req.method) res.send(200);
-    else next();
-});
+//     if ('OPTIONS' === req.method) res.send(200);
+//     else next();
+// });
   
   
 
