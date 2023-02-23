@@ -16,7 +16,9 @@ const openai = new OpenAIApi(configuration)
 
 app.use(bodyParser.json());
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://linkedin-bio-generator.onrender.com/']
+    origin: ['http://localhost:3000', 'https://linkedin-bio-generator.onrender.com/'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 
