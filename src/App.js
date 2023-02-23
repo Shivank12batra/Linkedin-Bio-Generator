@@ -18,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     // update the text in state, one letter at a time
-    console.log('hello guys!')
+    console.log(process.env.REACT_APP_URI_URL)
     console.log(currentIndex)
     const intervalId = setInterval(() => {
       if (currentIndex >= response.length) {
@@ -34,7 +34,7 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3001/', {
+    fetch(process.env.REACT_APP_URI_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
