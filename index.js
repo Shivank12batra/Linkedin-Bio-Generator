@@ -21,10 +21,21 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://linkedin-bio-generator.onrender.com"); // Change "*" to the allowed origin(s)
+    res.header("Access-Control-Allow-Origin", "https://linkedin-bio-generator.onrender.com/");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  
+    // Handle preflight request
+    if (req.method === "OPTIONS") {
+      res.header("Access-Control-Allow-Origin", "https://linkedin-bio-generator.onrender.com/");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+      res.status(200).end();
+    } else {
+      next();
+    }
   });
+  
   
 
   app.get('/', (req, res) => {
