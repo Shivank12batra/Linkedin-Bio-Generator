@@ -1,7 +1,7 @@
 require('dotenv').config();
 const OpenAI = require('openai')
 const {Configuration, OpenAIApi} = OpenAI
-const {createProxyMiddleware} = require('http-proxy-middleware')
+const proxy = require('http-proxy-middleware')
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -16,10 +16,13 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 // Set up the proxy middleware
-app.use('/', createProxyMiddleware({ 
-  target: process.env.REACT_APP_URI_URL,
-  changeOrigin: true 
-}));
+app.use(
+    proxy('/', {
+        target: process.env.REACT_APP_URI_URL,
+        secure: false,
+        changeOrigin: true
+    })
+)
 
 app.use(bodyParser.json());
 app.use(cors());
