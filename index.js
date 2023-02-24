@@ -1,6 +1,7 @@
 require('dotenv').config();
 const OpenAI = require('openai')
 const {Configuration, OpenAIApi} = OpenAI
+const {createProxyMiddleware} = require('http-proxy-middleware')
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -14,11 +15,17 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 
+// Set up the proxy middleware
+app.use('/', createProxyMiddleware({ 
+  target: 'linkedin-bio-generator.onrender.com', 
+  changeOrigin: true 
+}));
+
 app.use(bodyParser.json());
 app.use(cors());
 
 // OPTIONS request handler for /api/data
-app.options('/', cors());
+// app.options('/', cors());
 /** CORS setting with OPTIONS pre-flight handling */
 // app.use(function(req, res, next){
 //     res.header('Access-Control-Allow-Origin', '*');
