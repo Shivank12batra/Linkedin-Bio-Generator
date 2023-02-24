@@ -17,7 +17,7 @@ const openai = new OpenAIApi(configuration)
 
 // Set up the proxy middleware
 app.use('/', createProxyMiddleware({ 
-  target: 'linkedin-bio-generator.onrender.com', 
+  target: process.env.REACT_APP_URI_URL,
   changeOrigin: true 
 }));
 
