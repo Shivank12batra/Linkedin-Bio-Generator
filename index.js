@@ -44,6 +44,8 @@ app.use(bodyParser.json());
 //     console.log('this is working')
 //   })
 
+app.use(express.static('build'))
+
 
 app.post('/api', async(req, res) => {
     const {name, jobTitle, industry, experience, skills, education, style, tone, funFact} = req.body
