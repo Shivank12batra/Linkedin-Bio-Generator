@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import './App.css';
 
 
@@ -15,32 +15,40 @@ const App = () => {
   const [response, setResponse] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [bio, setBio] = useState('')
+  const shouldTriggerEffectRef = useRef(true);
 
   useEffect(() => {
     // update the text in state, one letter at a time
-    console.log(process.env.REACT_APP_URI_URL)
-    console.log(currentIndex)
-    const intervalId = setInterval(() => {
-      if (currentIndex >= response.length) {
-        clearInterval(intervalId);
-      } else {
-        setBio(response.substring(0, currentIndex + 1));
-        setCurrentIndex(currentIndex + 1);
-      }
-    }, 100);
-    return () => clearInterval(intervalId);
+    if (shouldTriggerEffectRef.current) {
+      const intervalId = setInterval(() => {
+        if (currentIndex >= response.length) {
+          clearInterval(intervalId);
+        } else {
+          setBio(response.substring(0, currentIndex + 1));
+          setCurrentIndex(currentIndex + 1);
+        }
+      }, 100);
+      return () => clearInterval(intervalId);
+    }
   }, [currentIndex, response])
   
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(process.env.REACT_APP_URI_URL, {
+    shouldTriggerEffectRef.current = false
+    setCurrentIndex(0)
+    setResponse('')
+    setBio('')
+    fetch('/api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({name, jobTitle, industry, experience, skills, education, style, tone, funFact}),
-    }).then((res) => res.json()).then((data) => setResponse(data.message))
+    }).then((res) => res.json()).then((data) => {
+      shouldTriggerEffectRef.current = true
+      setResponse(data.message)
+    })
   }
 
   const handleStyleChange = (event) => {

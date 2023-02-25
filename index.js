@@ -4,7 +4,7 @@ const {Configuration, OpenAIApi} = OpenAI
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -24,7 +24,7 @@ const openai = new OpenAIApi(configuration)
 // )
 
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 
 // OPTIONS request handler for /api/data
 // app.options('/', cors());
@@ -45,7 +45,7 @@ app.use(cors());
 //   })
 
 
-app.post('/', async(req, res) => {
+app.post('/api', async(req, res) => {
     const {name, jobTitle, industry, experience, skills, education, style, tone, funFact} = req.body
     const prompt = `Generate A linkedin Bio For my profile based on the following parameters:
  
