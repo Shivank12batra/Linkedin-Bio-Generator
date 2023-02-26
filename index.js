@@ -76,18 +76,27 @@ app.post('/api', async(req, res) => {
     Education:"BMS Student(2nd year)", Skills: Research, Content Writing, Debating, Style: Concise, Tone: Verbose, Fun Fact: ""
     
     Bio: Hey! I'm Naman Arora, a second-year BMS student with skills in research, content writing, and debating. I'm enthusiastic about using my skills and knowledge to pursue opportunities in these areas. Let's connect if you have any opportunities or if you'd like to discuss research, content writing, or debating!
+
+    Name: "", Job Title: Surgeon, Industry: "", Experience: 5 years,
+    Education:"MBBS", Skills:"", Style: Descriptive, Tone: Verbose, Fun Fact/hobbies: poetry and running marathons
+
+    Bio: As an experienced surgeon with five years of practice under my belt, I take pride in delivering exceptional care to my patients. I am an MBBS graduate with a passion for precision, attention to detail, and a desire to make a positive impact on the lives of others.
+
+    Beyond the operating room, I am an accomplished poet and marathon runner. These passions allow me to express my creativity and maintain a well-rounded perspective on life.
+    
+    My dedication to continuous learning and improvement drives me to explore new techniques and collaborate with other medical professionals.
     
     Name: ${name}, Job Title: ${jobTitle}, Industry: ${industry}, Experience: ${experience} years, Education: ${education}, Skills: ${skills}, Style: ${style}, Tone: ${tone}, Fun Fact: ${funFact}
     
     Bio:`
 
-    const tokens = style === 'concise' ? 100 : 300
+    const tokens = style === 'concise' ? 100 : 500
     try {
         const response = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: `${prompt}`,
         max_tokens: tokens,
-        temperature: 0,
+        temperature: 0.4,
     })
     const message = response.data.choices[0].text
     console.log(message)
