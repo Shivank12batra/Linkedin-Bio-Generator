@@ -135,5 +135,8 @@ textarea {
 }
 
 .name-link {
+  color: #fff;
+  text-decoration: none;
   text-decoration-line: underline;
+  margin-left: 0.2rem
 }
