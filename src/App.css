@@ -133,3 +133,7 @@ textarea {
     width: 50%;
   }
 }
+
+.name-link {
+  text-decoration-line: underline;
+}

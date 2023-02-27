@@ -140,7 +140,7 @@ const App = () => {
       <textarea  value={bio} cols={50} rows={10} placeholder='your LinkedIn Bio Will Be Generated Here'></textarea>
       </form>
       <footer className='footer-class'>
-        Made with <span style={{'margin':'0.3rem'}}><i class="fa fa-heart"></i></span> by Shivank
+        Made with <span style={{'margin':'0.3rem'}}><i class="fa fa-heart"></i></span> by <span> <a href='https://github.com/Shivank12batra' className='name-link'>Shivank</a></span>
       </footer>
     </div>
   )
