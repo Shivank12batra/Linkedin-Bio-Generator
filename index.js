@@ -15,6 +15,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration)
 
 app.use(bodyParser.json());
+app.use(express.static('build'));
 
 
 app.post('/api', async(req, res) => {
