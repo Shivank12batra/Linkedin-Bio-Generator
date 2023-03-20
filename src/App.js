@@ -1,20 +1,17 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useEffect, useRef} from 'react'
 import './App.css';
+import {FormState} from './Reducers.js'
 
 
 const App = () => {
-  const [name, setName] = useState('')
-  const [jobTitle, setJobTitle] = useState('')
-  const [industry, setIndustry] = useState('')
-  const [experience, setExperience] = useState(0)
-  const [skills, setSkills] = useState('')
-  const [education, setEducation] = useState('')
-  const [style, setStyle] = useState('concise')
-  const [tone, setTone] = useState('simple')
-  const [funFact, setFunFact] = useState('')
-  const [response, setResponse] = useState('')
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [bio, setBio] = useState('')
+  const {state: {name, title,
+     industry, experience,
+     skills, education,
+     style, tone,
+     fact, response,
+     idx:currentIndex, bio 
+    }, dispatch} = FormState()
+    console.log(currentIndex)
   const shouldTriggerEffectRef = useRef(true);
 
   useEffect(() => {
@@ -24,8 +21,10 @@ const App = () => {
         if (currentIndex >= response.length) {
           clearInterval(intervalId);
         } else {
-          setBio(response.substring(0, currentIndex + 1));
-          setCurrentIndex(currentIndex + 1);
+          dispatch({type: 'CHANGE_BIO', payload: response.substring(0, currentIndex + 1)})
+          dispatch({type: 'CHANGE_IDX', payload: currentIndex + 1})
+          // setBio(response.substring(0, currentIndex + 1));
+          // setCurrentIndex(currentIndex + 1);
         }
       }, 100);
       return () => clearInterval(intervalId);
@@ -36,28 +35,24 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     shouldTriggerEffectRef.current = false
-    setCurrentIndex(0)
-    setResponse('')
-    setBio('')
+    dispatch({type: 'CHANGE_IDX', payload: 0})
+    dispatch({type: 'CHANGE_RESPONSE', payload: ''})
+    dispatch({type: 'CHANGE_BIO', payload: ''})
+    // setCurrentIndex(0)
+    // setResponse('')
+    // setBio('')
     fetch('/api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({name, jobTitle, industry, experience, skills, education, style, tone, funFact}),
+      body: JSON.stringify({name, title, industry, experience, skills, education, style, tone, fact}),
     }).then((res) => res.json()).then((data) => {
       shouldTriggerEffectRef.current = true
-      setResponse(data.message)
+      dispatch({type: 'CHANGE_RESPONSE', payload: data.message})
+      // setResponse(data.message)
     })
   }
-
-  const handleStyleChange = (event) => {
-    setStyle(event.target.value);
-  };
-
-  const handleToneChange = (event) => {
-    setTone(event.target.value);
-  };
 
   return (
     <div className='container'>
@@ -68,27 +63,45 @@ const App = () => {
       <form className='form-class' onSubmit={handleSubmit}>
       <div className='input-container'>
       <label htmlFor="name">Name</label>
-      <input value={name} onChange={(e) => setName(e.target.value)} placeholder='John Doe' type="text" id="name"/>
+      <input value={name} onChange={(e) => dispatch({
+        type: 'CHANGE_NAME',
+        payload: e.target.value
+      })} placeholder='John Doe' type="text" id="name"/>
       </div>
       <div className='input-container'>
       <label htmlFor="job-title">Job Title</label>
-      <input value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder='Financial Analyst' type="text" id="job-title"/>
+      <input value={title} onChange={(e) => dispatch({
+        type: 'CHANGE_TITLE',
+        payload: e.target.value
+      })} placeholder='Financial Analyst' type="text" id="job-title"/>
       </div>
       <div className='input-container'>
       <label htmlFor="industry">Industry</label>
-      <input value={industry} onChange={(e) => setIndustry(e.target.value)} placeholder='Finance' type="text" id="industry"/>
+      <input value={industry} onChange={(e) => dispatch({
+        type: 'CHANGE_INDUSTRY',
+        payload: e.target.value
+      })} placeholder='Finance' type="text" id="industry"/>
       </div>
       <div className='input-container'>
       <label htmlFor="experience">Experience</label>
-      <input value={experience} onChange={(e) => setExperience(e.target.value)} type="number" min='0' id="experience"/>
+      <input value={experience} onChange={(e) => dispatch({
+        type: 'CHANGE_EXPERIENCE',
+        payload: parseInt(e.target.value)
+      })} type="number" min='0' id="experience"/>
       </div>
       <div className='input-container'>
       <label htmlFor="education">Education</label>
-      <input value={education} onChange={(e) => setEducation(e.target.value)} placeholder='MBA In Finance' type="text" id="experience"/>
+      <input value={education} onChange={(e) => dispatch({
+        type: 'CHANGE_EDUCATION',
+        payload: e.target.value
+      })} placeholder='MBA In Finance' type="text" id="experience"/>
       </div>
-      <div className='input-container'>
+      <div className='input-container'> 
       <label htmlFor='skills'>Skills</label>
-      <input value={skills} onChange={(e) => setSkills(e.target.value)} placeholder='Financial Modelling, MS Excel' type='text' id='funFact'/>
+      <input value={skills} onChange={(e) => dispatch({
+        type: 'CHANGE_SKILLS',
+        payload: e.target.value
+      })} placeholder='Financial Modelling, MS Excel' type='text' id='funFact'/>
       </div>
       <div className='input-container'>
         <label htmlFor='style'>Style</label>
@@ -98,7 +111,10 @@ const App = () => {
           id="option1"
           value="concise"
           checked={style === "concise"}
-          onChange={handleStyleChange}
+          onChange={(e) => dispatch({
+            type: 'CHANGE_STYLE',
+            payload: e.target.value
+          })}
         />
         <label htmlFor="option1" className='radio-label'>Concise</label>
         <input
@@ -106,7 +122,10 @@ const App = () => {
           id="option2"
           value="descriptive"
           checked={style === "descriptive"}
-          onChange={handleStyleChange}
+          onChange={(e) => dispatch({
+            type: 'CHANGE_STYLE',
+            payload: e.target.value
+          })}
         />
         <label htmlFor="option2" className='radio-label'>Descriptive</label>
         </div>
@@ -119,7 +138,10 @@ const App = () => {
         id="option3"
         value="simple"
         checked={tone === "simple"}
-        onChange={handleToneChange}
+        onChange={(e) => dispatch({
+          type: 'CHANGE_TONE',
+          payload: e.target.value
+        })}
       />
       <label htmlFor="option3" className='radio-label'>Simple</label>
       <input
@@ -127,14 +149,20 @@ const App = () => {
         id="option4"
         value="verbose"
         checked={tone === "verbose"}
-        onChange={handleToneChange}
+        onChange={(e) => dispatch({
+          type: 'CHANGE_TONE',
+          payload: e.target.value
+        })}
       />
       <label htmlFor="option4" className='radio-label'>Verbose</label>
       </div>
       </div>
       <div className='input-container'>
       <label htmlFor='funFact'>Fun Fact</label>
-      <input value={funFact} onChange={(e) => setFunFact(e.target.value)} placeholder='quick learner, likes anime, plays guitar' type='text' id='funFact'/>
+      <input value={fact} onChange={(e) => dispatch({
+            type: 'CHANGE_FACT',
+            payload: e.target.value
+          })}placeholder='quick learner, likes anime, plays guitar' type='text' id='funFact'/>
       </div>
       <button type='submit' className='submit-btn'>Generate Bio</button>
       <textarea  value={bio} cols={50} rows={10} placeholder='your LinkedIn Bio Will Be Generated Here'></textarea>

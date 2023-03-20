@@ -14,41 +14,11 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 
-// Set up the proxy middleware
-// app.use(
-//     proxy('/', {
-//         target: process.env.REACT_APP_URI_URL,
-//         secure: false,
-//         changeOrigin: true
-//     })
-// )
-
 app.use(bodyParser.json());
-// app.use(cors());
-
-// OPTIONS request handler for /api/data
-// app.options('/', cors());
-/** CORS setting with OPTIONS pre-flight handling */
-// app.use(function(req, res, next){
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, accept, access-control-allow-origin');
-
-//     if ('OPTIONS' === req.method) res.send(200);
-//     else next();
-// });
-  
-  
-
-//   app.get('/', (req, res) => {
-//     console.log('this is working')
-//   })
-
-app.use(express.static('build'))
 
 
 app.post('/api', async(req, res) => {
-    const {name, jobTitle, industry, experience, skills, education, style, tone, funFact} = req.body
+    const {name, title, industry, experience, skills, education, style, tone, fact} = req.body
     const prompt = `Generate A linkedin Bio For my profile based on the following parameters:
  
     Name: Shivank Batra, Job Title: "", Industry: Computer Science, Experience: 0 years,
@@ -86,7 +56,7 @@ app.post('/api', async(req, res) => {
     
     My dedication to continuous learning and improvement drives me to explore new techniques and collaborate with other medical professionals.
     
-    Name: ${name}, Job Title: ${jobTitle}, Industry: ${industry}, Experience: ${experience} years, Education: ${education}, Skills: ${skills}, Style: ${style}, Tone: ${tone}, Fun Fact: ${funFact}
+    Name: ${name}, Job Title: ${title}, Industry: ${industry}, Experience: ${experience} years, Education: ${education}, Skills: ${skills}, Style: ${style}, Tone: ${tone}, Fun Fact: ${fact}
     
     Bio:`
 
