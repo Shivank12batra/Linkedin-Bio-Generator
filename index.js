@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 const configuration = new Configuration({
-    organization: "org-MSzKGqG43nicxKtFfb5WPvTB",
+    organization: "org-IQ3DZcDpDjIJvScdT7SsP5CG",
     apiKey: process.env.OPENAI_API_KEY
 })
 const openai = new OpenAIApi(configuration)
@@ -73,7 +73,7 @@ app.post('/api', async(req, res) => {
     console.log(message)
     res.json({message: message})   
     } catch (error) {
-        res.json({message: 'Sorry! Because of too many hits on the server, we are unable to process your request right'})
+        res.json({message: 'Sorry! Because of too many hits on the server, we are unable to process your request right now.'})
     }
 })
 
